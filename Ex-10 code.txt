@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Contact Form</h2>
+    <form id="myForm">
+      <div class="form-group">
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required>
+        <span id="emailError" class="error"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" name="phone" required>
+        <span id="phoneError" class="error"></span>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.6.0/validator.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Body styling */
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Container styling */
+  .container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  /* Form layout */
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Label styling */
+  label {
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  /* Input field styling */
+  input {
+    margin-bottom: 15px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  /* Input focus effect */
+  input:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+    outline: none;
+  }
+  
+  /* Button styling (New Green Color) */
+  button {
+    padding: 12px;
+    background: linear-gradient(135deg, #38ef7d, #11998e);
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+  }
+  
+  /* Button hover effect */
+  button:hover {
+    background: linear-gradient(135deg, #11998e, #38ef7d);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Error text */
+  .error {
+    color: #e74c3c;
+    font-size: 0.85em;
+    margin-top: -8px;
+    margin-bottom: 10px;
+  }
+  
+
+
+script.js
+*/
+document.getElementById('myForm').addEventListener('submit', function (e)
+{ e.preventDefault();
+
+let email = document.getElementById('email').value;
+let phone = document.getElementById('phone').value;
+let emailError = document.getElementById('emailError');
+let phoneError = document.getElementById('phoneError');
+// Clear previous error messages
+emailError.textContent = '';
+phoneError.textContent = '';
+// Validate email
+if (!validator.isEmail(email)) {
+emailError.textContent = 'Please enter a valid email address.';
+}
+// Validate phone number
+if (!validator.isMobilePhone(phone, 'any')) {
+phoneError.textContent = 'Please enter a valid phone number.';
+}
+// If no errors, submit the form (for demonstration purposes, we'll just log the values)
+if (validator.isEmail(email) && validator.isMobilePhone(phone, 'any')) {
+console.log('Email:', email);
+console.log('Phone:', phone);
+}
+});
